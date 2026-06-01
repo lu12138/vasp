@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VASP Workflow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-main">
+        <a class="brand" href="#home" aria-label="返回首页">
+          <span class="brand-mark">V</span>
+          <span>VASP Workflow</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+          <a class="flow-nav-link" href="#environment">计算流程</a>
+          <a href="#bash">常用代码</a>
+          <a class="input-nav-link" href="#templates">输入文件</a>
+          <a href="#faq">常见问题</a>
+        </nav>
+      </div>
+      <nav class="flow-subnav" aria-label="计算流程子导航" hidden>
+        <a href="#environment">环境搭建</a>
+        <a href="#flow">计算任务</a>
+      </nav>
+      <nav class="input-subnav" aria-label="输入文件子导航" hidden>
+        <a href="#templates">INCAR</a>
+        <a href="#poscar">POSCAR</a>
+        <a href="#potcar">POTCAR</a>
+        <a href="#kpoints">KPOINTS</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero page-section" data-page="home" aria-label="VASP 计算流程首页">
+        <div class="hero-content">
+          <p class="eyebrow">VASP Workflow</p>
+          <h1>VASP Workflow</h1>
+          <p class="hero-copy">
+            不只是笔记页面：它能按任务整理模型、生成输入文件顺序，并辅助合成 POTCAR。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#environment">计算流程</a>
+            <a class="secondary-action" href="#bash">常用代码</a>
+            <a class="secondary-action" href="#templates">输入文件</a>
+            <a class="secondary-action" href="#faq">常见问题</a>
+          </div>
+
+          <div class="home-flow" aria-label="VASP 计算流程总览">
+            <a class="home-flow-step" href="#flow">
+              <span class="home-flow-index">01</span>
+              <strong>确定计算任务</strong>
+              <span class="home-flow-note">吸附能、缺陷、能带、DOS 等任务，直接查看需要计算的模型和最终结果。</span>
+            </a>
+            <div class="home-flow-step input-step">
+              <span class="home-flow-index">02</span>
+              <strong>准备输入文件</strong>
+              <span class="home-flow-note">按四类输入文件拆开整理，POTCAR 页支持读取 POSCAR 元素顺序后一键合成。</span>
+              <div class="input-file-pills" aria-label="输入文件入口">
+                <a href="#templates">INCAR</a>
+                <a href="#poscar">POSCAR</a>
+                <a class="has-mini-tip" href="#potcar" data-tip="读取 POSCAR 元素顺序，一键合成 POTCAR。">POTCAR</a>
+                <a href="#kpoints">KPOINTS</a>
+              </div>
+            </div>
+            <a class="home-flow-step" href="#bash">
+              <span class="home-flow-index">03</span>
+              <strong>输入计算代码</strong>
+              <span class="home-flow-note">常用 Bash 命令集中在一个代码视图，复制时不带注释。</span>
+            </a>
+            <a class="home-flow-step" href="#flow">
+              <span class="home-flow-index">04</span>
+              <strong>检查与后处理</strong>
+              <span class="home-flow-note">按任务提示收敛、能量、能带、态密度等结果该从哪里提取。</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="environment" class="section page-section" data-page="environment">
+        <div class="section-heading">
+          <p class="eyebrow">Environment</p>
+          <h2>环境搭建</h2>
+          <p class="section-copy">
+            给新手准备的免费/开源工具入口，用于结构查看、输入文件生成和结果后处理。
+          </p>
+        </div>
+
+        <div class="environment-layout">
+          <div class="environment-list">
+            <article class="environment-item is-featured">
+              <div>
+                <h3>VASPKIT</h3>
+                <p>面向 VASP 原始计算数据的用户友好型预处理与后处理工具，可在交互界面或命令行模式下运行。</p>
+              </div>
+            </article>
+            <article class="environment-item is-featured">
+              <div>
+                <h3>VESTA</h3>
+                <p>用于电子和结构分析的三维可视化系统，可显示结构模型、体数据和晶体形貌。</p>
+              </div>
+            </article>
+            <article class="environment-item">
+              <div>
+                <h3>pymatgen</h3>
+                <p>Python Materials Genomics，开源材料分析库，提供结构、分子、组成等核心对象和多种电子结构程序文件读写能力。</p>
+              </div>
+            </article>
+            <article class="environment-item">
+              <div>
+                <h3>ASE</h3>
+                <p>Atomic Simulation Environment，一组用于搭建、操作、运行、可视化和分析原子模拟的 Python 工具与模块。</p>
+              </div>
+            </article>
+            <article class="environment-item">
+              <div>
+                <h3>phonopy</h3>
+                <p>开源声子计算包，用于谐近似和准谐近似层级的声子计算，可输出声子能带、DOS 和热力学性质。</p>
+              </div>
+            </article>
+            <article class="environment-item">
+              <div>
+                <h3>Bader</h3>
+                <p>基于电子电荷密度划分原子的电荷分析方法，常用 Bader 体积中的电荷近似表示原子的总电子电荷。</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="environment-links" aria-label="环境搭建入口">
+            <p class="panel-label">Links</p>
+            <h3>入口</h3>
+            <a href="https://vaspkit.com/" target="_blank" rel="noreferrer">VASPKIT</a>
+            <a href="https://www.jp-minerals.org/vesta/en/" target="_blank" rel="noreferrer">VESTA</a>
+            <a href="https://pymatgen.org/" target="_blank" rel="noreferrer">pymatgen</a>
+            <a href="https://ase-lib.org/" target="_blank" rel="noreferrer">ASE</a>
+            <a href="https://phonopy.github.io/phonopy/" target="_blank" rel="noreferrer">phonopy</a>
+            <a href="https://henkelmanlab.org/code/bader/" target="_blank" rel="noreferrer">Bader</a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="flow" class="section page-section" data-page="flow">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>计算任务导航</h2>
+          <p class="section-copy">
+            先选要计算的性质，再看需要准备的模型、最后提取的结果和必要公式。
+          </p>
+        </div>
+        <article class="detail-panel" id="stepDetail" aria-live="polite"></article>
+      </section>
+
+      <section id="faq" class="section faq-section page-section" data-page="faq">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>常见问题</h2>
+          <p class="section-copy">
+            敬请期待。
+          </p>
+        </div>
+      </section>
+
+      <section id="bash" class="section bash-section page-section" data-page="bash">
+        <div class="section-heading">
+          <p class="eyebrow">Bash</p>
+          <h2>常用 Bash 代码</h2>
+          <p class="section-copy">
+            面向 VASP 计算的常用命令片段，复制后按自己的队列系统和目录名修改。
+          </p>
+        </div>
+
+        <article class="github-code">
+          <div class="github-code-header">
+            <span>vasp-common.sh</span>
+            <small>常用 VASP Bash 片段</small>
+          </div>
+          <div class="github-code-body" role="list" aria-label="常用 Bash 代码">
+            <div class="bash-line is-comment"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"># Basic: 常用基础命令</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">pwd                                      # 显示当前所在目录</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">ls                                       # 列出当前目录下的文件和文件夹</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">ls -lh                                   # 以可读大小显示文件列表</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cd 01_relax                              # 进入 01_relax 文件夹</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cd ..                                    # 返回上一级目录</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">mkdir test                               # 新建 test 文件夹</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cp CONTCAR POSCAR                        # 复制 CONTCAR 并命名为 POSCAR</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">mv CONTCAR CONTCAR_relaxed               # 重命名文件</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">rm WAVECAR                               # 删除 WAVECAR 文件，删除前确认不再需要</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">less OUTCAR                              # 分页查看 OUTCAR 文件</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">tail -n 20 OSZICAR                       # 查看 OSZICAR 最后 20 行</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "F=" OSZICAR                        # 搜索 OSZICAR 中的离子步能量行</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">vasp_std                                 # 直接运行标准版 VASP，适合交互节点测试</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">mpirun -np 16 vasp_std                   # 使用 16 个 MPI 进程运行 VASP</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">sbatch job.sh                            # 使用 Slurm 提交当前目录的任务</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">squeue -u $USER                          # 查看自己正在排队或运行的任务</code></div>
+            <div class="bash-line is-gap"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"></code></div>
+            <div class="bash-line is-comment"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"># Advanced: 计算检查与结果提取</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "reached required accuracy" OUTCAR  # 检查离子步是否达到收敛标准</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "F=" OSZICAR | tail -n 5            # 查看最后 5 个离子步总能</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "E0=" OSZICAR | tail -n 1           # 查看最后一步外推总能</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "energy  without entropy" OUTCAR | tail -n 1  # 提取最终无熵修正能量</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">grep "Elapsed time" OUTCAR               # 查看本次计算耗时</code></div>
+            <div class="bash-line is-gap"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"></code></div>
+            <div class="bash-line is-comment"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"># Advanced: 批量提取能量</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">for dir in */; do                         # 遍历当前目录下所有子目录</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  test -f "$dir/OSZICAR" || continue       # 没有 OSZICAR 的目录直接跳过</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  energy=$(grep "F=" "$dir/OSZICAR" | tail -n 1 | awk '{print $5}')  # 提取最后一步自由能</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  printf "%-28s %s\n" "$dir" "$energy"    # 按目录名和能量两列输出</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">done &gt; energy_summary.dat                 # 保存结果到 energy_summary.dat</code></div>
+            <div class="bash-line is-gap"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"></code></div>
+            <div class="bash-line is-comment"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"># Advanced: 优化后转静态计算</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cp 01_relax/CONTCAR 02_static/POSCAR      # 将优化后结构作为静态计算输入</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cp 01_relax/POTCAR 02_static/POTCAR       # 复用相同 POTCAR，保持元素顺序一致</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cp 01_relax/KPOINTS 02_static/KPOINTS     # 先复用 KPOINTS，必要时再加密</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cp INCAR_static 02_static/INCAR           # 使用静态计算专用 INCAR</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">cd 02_static                              # 进入静态计算目录</code></div>
+            <div class="bash-line is-gap"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"></code></div>
+            <div class="bash-line is-comment"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code"># Submit: 批量提交任务</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">for dir in 01_relax 02_static 03_band; do  # 指定需要提交的计算目录</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  test -d "$dir" || continue               # 目录不存在时跳过</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  test -f "$dir/job.sh" || continue        # 没有提交脚本时跳过</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">  (cd "$dir" &amp;&amp; sbatch job.sh)             # 进入目录并用 Slurm 提交任务</code></div>
+            <div class="bash-line"><button class="line-copy" type="button" aria-label="复制本行">⧉</button><code class="bash-line-code">done                                       # 完成所有目录的提交</code></div>
+          </div>
+        </article>
+      </section>
+
+      <section id="templates" class="section page-section" data-page="templates">
+        <div class="section-heading">
+          <p class="eyebrow">Templates</p>
+          <h2>常用 INCAR 模板</h2>
+          <p class="section-copy">
+            参数依据 VASP Wiki 官方手册整理。
+          </p>
+        </div>
+        <div class="template-tabs" role="tablist" aria-label="INCAR 模板">
+          <button class="tab is-active" data-template="relax" role="tab">结构优化</button>
+          <button class="tab" data-template="static" role="tab">静态计算</button>
+          <button class="tab" data-template="band" role="tab">能带计算</button>
+          <button class="tab" data-template="dos" role="tab">态密度</button>
+          <button class="tab" data-template="all" role="tab">所有参数</button>
+        </div>
+        <div class="template-board">
+          <pre class="code-panel"><code id="templateCode"></code></pre>
+          <aside class="tag-panel" id="tagPanel" aria-live="polite"></aside>
+        </div>
+      </section>
+
+      <section id="poscar" class="section poscar-section page-section" data-page="poscar">
+        <div class="section-heading">
+          <p class="eyebrow">POSCAR</p>
+          <h2>POSCAR 准备流程</h2>
+          <p class="section-copy">
+            先确定结构来源，再完成建模、格式转换和最终检查。POSCAR 的元素顺序必须和 POTCAR 合成顺序一致。
+          </p>
+        </div>
+
+        <div class="poscar-flow" aria-label="POSCAR 准备步骤">
+          <article class="poscar-step">
+            <span>01</span>
+            <h3>获取结构</h3>
+            <p>晶体优先下载 CIF；分子优先下载 SDF、MOL 或 XYZ。</p>
+          </article>
+          <article class="poscar-step">
+            <span>02</span>
+            <h3>建模处理</h3>
+            <p>按任务建立原胞、超胞、表面、缺陷、吸附或分子盒子。</p>
+          </article>
+          <article class="poscar-step">
+            <span>03</span>
+            <h3>转换 POSCAR</h3>
+            <p>用 VASPKIT、pymatgen 或 ASE 转成 VASP 输入结构。</p>
+          </article>
+          <article class="poscar-step">
+            <span>04</span>
+            <h3>检查后使用</h3>
+            <p>检查元素顺序、晶胞、坐标、真空层、固定原子和原子重叠。</p>
+          </article>
+        </div>
+
+        <div class="resource-grid" aria-label="结构下载与转换入口">
+          <article class="resource-card">
+            <p class="panel-label">Crystal CIF</p>
+            <h3>晶体结构下载</h3>
+            <ul>
+              <li><a href="https://www.crystallography.net/cod/" target="_blank" rel="noreferrer">Crystallography Open Database</a><span>免费开放 CIF，适合找实验晶体结构。</span></li>
+              <li><a href="https://materialsproject.org/" target="_blank" rel="noreferrer">Materials Project</a><span>常用计算材料数据库，下载结构前注意材料编号和相稳定性。</span></li>
+              <li><a href="https://aflowlib.org/" target="_blank" rel="noreferrer">AFLOW</a><span>适合补充查找晶体结构和计算材料条目。</span></li>
+            </ul>
+          </article>
+
+          <article class="resource-card">
+            <p class="panel-label">Molecule</p>
+            <h3>化学结构下载</h3>
+            <ul>
+              <li><a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noreferrer">PubChem</a><span>下载 2D/3D 分子结构，常见格式包括 SDF。</span></li>
+              <li><a href="https://webbook.nist.gov/chemistry/" target="_blank" rel="noreferrer">NIST Chemistry WebBook</a><span>查分子信息、热化学和谱学数据。</span></li>
+              <li><a href="https://www.chemspider.com/" target="_blank" rel="noreferrer">ChemSpider</a><span>适合按名称、CAS 或式量补充检索分子结构。</span></li>
+            </ul>
+          </article>
+
+          <article class="resource-card">
+            <p class="panel-label">Convert</p>
+            <h3>转换与检查工具</h3>
+            <ul>
+              <li><a href="https://vaspkit.com/" target="_blank" rel="noreferrer">VASPKIT</a><span>生成 VASP 输入、建表面、转格式、检查结构。</span></li>
+              <li><a href="https://pymatgen.org/" target="_blank" rel="noreferrer">pymatgen</a><span>适合脚本化读取 CIF、生成超胞和写出 POSCAR。</span></li>
+              <li><a href="https://ase-lib.org/ase/io/formatoptions.html" target="_blank" rel="noreferrer">ASE</a><span>支持多种结构格式读写，可自动化批量转换。</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="ms-board">
+          <article class="ms-card">
+            <p class="panel-label">Materials Studio</p>
+            <h3>MS 建模流程</h3>
+            <ol>
+              <li>导入 CIF，先检查晶格、元素、占位和对称性。</li>
+              <li>按任务建立超胞、slab、缺陷、替位、间隙或吸附构型。</li>
+              <li>表面模型设置足够真空层，必要时固定底层原子。</li>
+              <li>分子吸附先放多个初始位点，避免初始距离过近。</li>
+              <li>导出 CIF、XSD 或 CAR，再用 VASPKIT、pymatgen、ASE 转成 POSCAR。</li>
+            </ol>
+          </article>
+          <article class="ms-card caution">
+            <p class="panel-label">Checklist</p>
+            <h3>注意事项</h3>
+            <ul>
+              <li>不要直接信任无序结构、部分占位和含溶剂 CIF，先清理再计算。</li>
+              <li>POSCAR 元素行顺序必须和 POTCAR 顺序一致。</li>
+              <li>吸附、缺陷、表面能等能量差计算要保持相同精度和可比模型。</li>
+              <li>磁性、价态、电荷态、偶极修正不会由 POSCAR 自动决定，需要在 INCAR 中设置。</li>
+              <li>最终打开结构确认没有原子重叠、真空层不足或坐标越界问题。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="kpoints" class="section kpoints-section page-section" data-page="kpoints">
+        <div class="section-heading">
+          <p class="eyebrow">KPOINTS</p>
+          <h2>KPOINTS 设置指导</h2>
+          <p class="section-copy">
+            KPOINTS 控制布里渊区采样。正式计算前先做收敛测试；做能量差比较时，相关模型应使用可比的采样精度。
+          </p>
+        </div>
+
+        <div class="kpoints-grid">
+          <article class="kpoint-card">
+            <span>01</span>
+            <h3>体相晶体</h3>
+            <p>三维周期结构使用 3D 网格，例如 5 5 5、7 7 7。金属和小晶胞通常需要更密网格。</p>
+          </article>
+          <article class="kpoint-card">
+            <span>02</span>
+            <h3>表面与二维材料</h3>
+            <p>真空方向通常设为 1，例如 5 5 1。只在有周期性的方向增加 K 点。</p>
+          </article>
+          <article class="kpoint-card">
+            <span>03</span>
+            <h3>分子与孤立团簇</h3>
+            <p>大真空盒中一般使用 Gamma only，即 1 1 1，并重点检查盒子尺寸。</p>
+          </article>
+          <article class="kpoint-card">
+            <span>04</span>
+            <h3>能带路径</h3>
+            <p>先用普通网格完成静态自洽，再用 Line-mode 高对称路径做非自洽能带计算。</p>
+          </article>
+        </div>
+
+        <div class="kpoints-board">
+          <article class="kpoints-panel">
+            <p class="panel-label">Mesh Choice</p>
+            <h3>常用写法</h3>
+            <div class="kpoint-examples">
+              <div>
+                <h4>Gamma 中心网格</h4>
+                <pre><code>Automatic mesh
+0
+Gamma
+5 5 1
+0 0 0</code></pre>
+              </div>
+              <div>
+                <h4>Monkhorst-Pack 网格</h4>
+                <pre><code>Automatic mesh
+0
+Monkhorst-Pack
+7 7 7
+0 0 0</code></pre>
+              </div>
+              <div>
+                <h4>INCAR 自动密度</h4>
+                <pre><code>KSPACING = 0.20
+KGAMMA   = .TRUE.</code></pre>
+              </div>
+            </div>
+          </article>
+
+          <article class="kpoints-panel">
+            <p class="panel-label">Workflow</p>
+            <h3>使用流程</h3>
+            <ol class="kpoint-flow-list">
+              <li>先固定 ENCUT，测试 3 3 3、5 5 5、7 7 7 等 K 点网格。</li>
+              <li>观察总能、力、带隙、吸附能或目标性质是否稳定。</li>
+              <li>表面、吸附、缺陷、替位等能量差计算保持同一套采样规则。</li>
+              <li>DOS 用更密网格；能带用静态 CHGCAR 加 Line-mode KPOINTS。</li>
+            </ol>
+          </article>
+        </div>
+
+        <div class="kpoints-notes">
+          <article>
+            <h3>经验检查</h3>
+            <ul>
+              <li>能量差任务不要让不同模型的 K 点密度相差太大。</li>
+              <li>晶胞越大，所需 K 点数通常越少；原胞越小，所需 K 点数通常越多。</li>
+              <li>金属体系对 K 点更敏感，需同时关注 ISMEAR 和 SIGMA。</li>
+              <li>使用 KSPACING 时要记录取值，保证后续任务可复现。</li>
+            </ul>
+          </article>
+          <article>
+            <h3>工具入口</h3>
+            <ul>
+              <li><a href="https://www.vasp.at/wiki/index.php/KPOINTS" target="_blank" rel="noreferrer">VASP Wiki: KPOINTS</a></li>
+              <li><a href="https://www.vasp.at/wiki/index.php/KSPACING" target="_blank" rel="noreferrer">VASP Wiki: KSPACING</a></li>
+              <li><a href="https://vaspkit.com/tutorials.html" target="_blank" rel="noreferrer">VASPKIT Tutorials</a></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="kpoints-easter">
+          <div class="terminal-top">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p class="terminal-line muted-line"># 还往下滑呢？要不直接用 VASPKIT 生成吧。</p>
+          <pre class="easter-output"><code>$ vaspkit
+302  Generate KPOINTS for SCF calculation
+303  Generate KPATH for band-structure calculation
+
+KPOINTS generated :)
+Remember: converge first, submit later.</code></pre>
+        </div>
+      </section>
+
+      <section id="potcar" class="section potcar-section page-section" data-page="potcar">
+        <div class="section-heading">
+          <p class="eyebrow">POTCAR Builder</p>
+          <h2>POTCAR 自动合成</h2>
+          <p class="section-copy">
+            读取 PAW 赝势文件夹和 POSCAR，按 POSCAR 元素顺序自动生成 POTCAR；需要时可手动调整 PAW 版本。
+          </p>
+        </div>
+        <div class="potcar-toolbar">
+          <div class="toolbar-item">
+            <label class="folder-picker">
+              <input id="pawFolderInput" type="file" webkitdirectory directory multiple />
+              <span>选择 PAW 赝势文件夹</span>
+            </label>
+            <span class="paw-status" id="pawStatus">尚未读取 PAW 文件夹</span>
+          </div>
+          <div class="toolbar-item">
+            <label class="folder-picker">
+              <input id="poscarInput" type="file" accept=".vasp,.poscar,.POSCAR,text/plain" />
+              <span>读取 POSCAR 自动合成</span>
+            </label>
+            <span class="paw-status" id="poscarStatus">尚未读取 POSCAR</span>
+          </div>
+        </div>
+        <div class="potcar-builder">
+          <div>
+            <div class="periodic-table" id="periodicTable" aria-label="元素周期表"></div>
+            <div class="variant-panel" id="variantPanel">
+              <p class="panel-label">PAW Variants</p>
+              <h3>选择元素</h3>
+              <p>点击周期表中的元素后，这里会显示该元素可用的 PAW 文件。</p>
+            </div>
+          </div>
+          <aside class="potcar-order">
+            <p class="panel-label">POSCAR Order</p>
+            <h3>手动添加</h3>
+            <div class="selected-potcars" id="selectedPotcars"></div>
+            <div class="potcar-actions">
+              <button id="downloadPotcar" type="button" disabled>合成并下载 POTCAR</button>
+              <button id="clearPotcar" type="button">清空顺序</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>Built for personal VASP workflow notes.</span>
+      <a href="#home">回到首页</a>
+    </footer>
+
+    <script src="script.js?v=env-priority-list"></script>
+  </body>
+</html>
