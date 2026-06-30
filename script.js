@@ -55,10 +55,257 @@ const steps = [
   }
 ];
 
+const figureReferenceLibrary = {
+  siteSpecificElectrodeposition: {
+    title: "Site-specific electrodeposition enables self-terminating growth of atomically dispersed metal catalysts",
+    journal: "Nature Communications",
+    visual: "slab",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-020-18430-8/MediaObjects/41467_2020_18430_Fig2_HTML.png",
+    note: "图中包含 DFT 优化后的 Pt-SAs/MoS2 结构模型，适合参考 slab 表面结构和活性位点展示。",
+    doi: "10.1038/s41467-020-18430-8",
+    url: "https://doi.org/10.1038/s41467-020-18430-8"
+  },
+  feNCOr: {
+    title: "Insights into the activity of single-atom Fe-N-C catalysts for oxygen reduction reaction",
+    journal: "Nature Communications",
+    visual: "energy",
+    image: "https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41467-022-29797-1/MediaObjects/41467_2022_29797_Fig1_HTML.png",
+    note: "可参考单原子催化活性位点、吸附中间体和反应能量图的展示方式。",
+    doi: "10.1038/s41467-022-29797-1",
+    url: "https://doi.org/10.1038/s41467-022-29797-1"
+  },
+  supportedClusters: {
+    title: "Deducing subnanometer cluster size and shape distributions of heterogeneous supported catalysts",
+    journal: "Nature Communications",
+    visual: "structure",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-023-37664-w/MediaObjects/41467_2023_37664_Fig2_HTML.png",
+    note: "图中展示最稳定吸附结构和 Gibbs free energy 分布，适合结构优化/总能筛选参考。",
+    doi: "10.1038/s41467-023-37664-w",
+    url: "https://doi.org/10.1038/s41467-023-37664-w"
+  },
+  adsorptionIntrinsic: {
+    title: "Determining the adsorption energies of small molecules with the intrinsic properties of adsorbates and substrates",
+    journal: "Nature Communications",
+    visual: "energy",
+    figure: "Fig. 1",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-020-14969-8/MediaObjects/41467_2020_14969_Fig1_HTML.png",
+    note: "图中直接比较不同吸附物在金属表面的 adsorption energy，和吸附能任务最对应。",
+    doi: "10.1038/s41467-020-14969-8",
+    url: "https://doi.org/10.1038/s41467-020-14969-8"
+  },
+  adsorptionBalanced: {
+    title: "Adsorption energies on transition metal surfaces: towards an accurate and balanced description",
+    journal: "Nature Communications",
+    visual: "surface",
+    figure: "Fig. 6",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-022-34507-y/MediaObjects/41467_2022_34507_Fig6_HTML.png",
+    note: "适合参考过渡金属表面吸附能标定、不同泛函结果比较和误差展示。",
+    doi: "10.1038/s41467-022-34507-y",
+    url: "https://doi.org/10.1038/s41467-022-34507-y"
+  },
+  cuSurfaceEnergy: {
+    title: "In situ copper faceting enables efficient CO2/CO electrolysis",
+    journal: "Nature Communications",
+    visual: "surface",
+    figure: "Fig. 1",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-024-45538-y/MediaObjects/41467_2024_45538_Fig1_HTML.png",
+    note: "图中直接给出 Cu(111)/Cu(100) 在不同覆盖度下的 surface energies 和 Wulff construction，和表面能任务对应。",
+    doi: "10.1038/s41467-024-45538-y",
+    url: "https://doi.org/10.1038/s41467-024-45538-y"
+  },
+  dosAdsorption: {
+    title: "Machine learned features from density of states for accurate adsorption energy prediction",
+    journal: "Nature Communications",
+    visual: "dos",
+    figure: "Fig. 7",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-020-20342-6/MediaObjects/41467_2020_20342_Fig7_HTML.png",
+    note: "图中直接给出 surface site 的 DOS、吸附敏感性和 COHP，适合 DOS/PDOS 图例参考。",
+    doi: "10.1038/s41467-020-20342-6",
+    url: "https://doi.org/10.1038/s41467-020-20342-6"
+  },
+  ureaMBenes: {
+    title: "Electrochemical synthesis of urea on MBenes",
+    journal: "Nature Communications",
+    visual: "reaction",
+    figure: "Fig. 3",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-021-24400-5/MediaObjects/41467_2021_24400_Fig3_HTML.png",
+    note: "图中是电化学反应 free energy profiles，适合吸附中间体和反应能量图参考。",
+    doi: "10.1038/s41467-021-24400-5",
+    url: "https://doi.org/10.1038/s41467-021-24400-5"
+  },
+  ammoniaDenitrification: {
+    title: "Steering from electrochemical denitrification to ammonia synthesis",
+    journal: "Nature Communications",
+    visual: "reaction",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-023-35785-w/MediaObjects/41467_2023_35785_Fig2_HTML.png",
+    note: "图中包含反应网络、全局能量优化和最优路径，适合反应路径/能垒图参考。",
+    doi: "10.1038/s41467-023-35785-w",
+    url: "https://doi.org/10.1038/s41467-023-35785-w"
+  },
+  substitutionalOxygen: {
+    title: "Identifying substitutional oxygen as a prolific point defect in monolayer transition metal dichalcogenides",
+    journal: "Nature Communications",
+    visual: "defect",
+    figure: "Fig. 3",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-019-11342-2/MediaObjects/41467_2019_11342_Fig3_HTML.png",
+    note: "图中是 DFT relaxed coordinates 的空位、H 替位和 O 替位模型，和替位缺陷最对应。",
+    doi: "10.1038/s41467-019-11342-2",
+    url: "https://doi.org/10.1038/s41467-019-11342-2"
+  },
+  spinDefectQubits: {
+    title: "Spin-defect qubits in two-dimensional transition metal dichalcogenides operating at telecom wavelengths",
+    journal: "Nature Communications",
+    visual: "defect",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-022-35048-0/MediaObjects/41467_2022_35048_Fig2_HTML.png",
+    note: "图中直接展示 defect formation energies，适合空位/点缺陷形成能图例参考。",
+    doi: "10.1038/s41467-022-35048-0",
+    url: "https://doi.org/10.1038/s41467-022-35048-0"
+  },
+  perovskiteDefect: {
+    title: "Inhibition of defect-induced alpha-to-delta phase transition for efficient and stable formamidinium perovskite solar cells",
+    journal: "Nature Communications",
+    visual: "defect",
+    figure: "Fig. 1",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-023-41853-y/MediaObjects/41467_2023_41853_Fig1_HTML.png",
+    note: "图中包含 point defects 对相变 energy barrier 的影响，适合缺陷诱导能量变化参考。",
+    doi: "10.1038/s41467-023-41853-y",
+    url: "https://doi.org/10.1038/s41467-023-41853-y"
+  },
+  calciumCarbides: {
+    title: "Investigation of exotic stable calcium carbides using theory and experiment",
+    journal: "Nature Communications",
+    visual: "structure",
+    figure: "Fig. 8",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fncomms7974/MediaObjects/41467_2015_Article_BFncomms7974_Fig8_HTML.jpg",
+    note: "图中是实验参数和 DFT predictions 对比，适合总能/结构稳定性结果参考。",
+    doi: "10.1038/ncomms7974",
+    url: "https://doi.org/10.1038/ncomms7974"
+  },
+  strainedGeInterstitial: {
+    title: "Direct bandgap emission from strain-doped germanium",
+    journal: "Nature Communications",
+    visual: "defect",
+    figure: "Fig. 1",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-024-44916-w/MediaObjects/41467_2024_44916_Fig1_HTML.png",
+    note: "图中展示 Li 原子占据 Ge 四面体间隙位点的计算模型和对应能带，适合间隙原子模型参考。",
+    doi: "10.1038/s41467-024-44916-w",
+    url: "https://doi.org/10.1038/s41467-024-44916-w"
+  },
+  gwBand2D: {
+    title: "Representing individual electronic states for machine learning GW band structures of 2D materials",
+    journal: "Nature Communications",
+    visual: "band",
+    figure: "Fig. 5",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-022-28122-0/MediaObjects/41467_2022_28122_Fig5_HTML.png",
+    note: "图中直接给出多种 2D 材料的 PBE/GW band structures，和能带结构任务最对应。",
+    doi: "10.1038/s41467-022-28122-0",
+    url: "https://doi.org/10.1038/s41467-022-28122-0"
+  },
+  absoluteEnergyLevels: {
+    title: "Absolute energy level positions in tin- and lead-based halide perovskites",
+    journal: "Nature Communications",
+    visual: "band",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-019-10468-7/MediaObjects/41467_2019_10468_Fig2_HTML.png",
+    note: "图中比较 measured 与 DFT-calculated DOS，适合 DOS/PDOS 和能级对齐参考。",
+    doi: "10.1038/s41467-019-10468-7",
+    url: "https://doi.org/10.1038/s41467-019-10468-7"
+  },
+  molecularConductors: {
+    title: "A single atom change turns insulating saturated wires into molecular conductors",
+    journal: "Nature Communications",
+    visual: "band",
+    image: "https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41467-021-23528-8/MediaObjects/41467_2021_23528_Fig1_HTML.png",
+    note: "可参考原子替换导致能带/导电性变化的结构-电子性质对应图。",
+    doi: "10.1038/s41467-021-23528-8",
+    url: "https://doi.org/10.1038/s41467-021-23528-8"
+  },
+  pseudodoping2D: {
+    title: "Pseudodoping of a metallic two-dimensional material by the supporting substrate",
+    journal: "Nature Communications",
+    visual: "charge",
+    figure: "Fig. 4",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-08088-8/MediaObjects/41467_2018_8088_Fig4_HTML.png",
+    note: "图中比较基底作用前后的 Ta-d DOS，适合界面电荷转移和 DOS 参考。",
+    doi: "10.1038/s41467-018-08088-8",
+    url: "https://doi.org/10.1038/s41467-018-08088-8"
+  },
+  carbonNitrideFe2: {
+    title: "Carbon nitride supported Fe2 cluster catalysts with superior performance for alkene epoxidation",
+    journal: "Nature Communications",
+    visual: "charge",
+    figure: "Fig. 3",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-018-04845-x/MediaObjects/41467_2018_4845_Fig3_HTML.jpg",
+    note: "图中包含理论 energy profile，适合催化反应路径和能垒展示参考。",
+    doi: "10.1038/s41467-018-04845-x",
+    url: "https://doi.org/10.1038/s41467-018-04845-x"
+  },
+  fePcBader: {
+    title: "Iron phthalocyanine with coordination induced electronic localization to boost oxygen reduction reaction",
+    journal: "Nature Communications",
+    visual: "charge",
+    figure: "Fig. 1",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-020-18062-y/MediaObjects/41467_2020_18062_Fig1_HTML.png",
+    note: "图中明确包含 Bader charge transfers、电子局域函数和吸附能，和 Bader 电荷分析最对应。",
+    doi: "10.1038/s41467-020-18062-y",
+    url: "https://doi.org/10.1038/s41467-020-18062-y"
+  },
+  mineralElectronTransfer: {
+    title: "Electron transfer rules of minerals under pressure informed by machine learning",
+    journal: "Nature Communications",
+    visual: "charge",
+    image: "https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41467-023-37384-1/MediaObjects/41467_2023_37384_Fig1_HTML.png",
+    note: "可参考电子转移趋势、价态变化和定量电荷分析的数据表达。",
+    doi: "10.1038/s41467-023-37384-1",
+    url: "https://doi.org/10.1038/s41467-023-37384-1"
+  },
+  heuslerOhmicInterface: {
+    title: "Thermal-inert and ohmic-contact interface for high performance half-Heusler based thermoelectric generator",
+    journal: "Nature Communications",
+    visual: "charge",
+    figure: "Fig. 4",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-022-35290-6/MediaObjects/41467_2022_35290_Fig4_HTML.png",
+    note: "图中明确包含 interface charge density difference，和电荷差分任务最对应。",
+    doi: "10.1038/s41467-022-35290-6",
+    url: "https://doi.org/10.1038/s41467-022-35290-6"
+  },
+  reactiveForceFields: {
+    title: "Active learning of reactive Bayesian force fields applied to heterogeneous catalysis dynamics of H/Pt",
+    journal: "Nature Communications",
+    visual: "neb",
+    figure: "Fig. 2",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-022-32294-0/MediaObjects/41467_2022_32294_Fig2_HTML.png",
+    note: "可参考表面反应动力学、迁移路径和能量变化数据图。",
+    doi: "10.1038/s41467-022-32294-0",
+    url: "https://doi.org/10.1038/s41467-022-32294-0"
+  },
+  co2ReductionNeb: {
+    title: "Reaction mechanism and kinetics for CO2 reduction on nickel single atom catalysts from quantum mechanics",
+    journal: "Nature Communications",
+    visual: "neb",
+    figure: "Fig. 3",
+    image: "https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41467-020-16119-6/MediaObjects/41467_2020_16119_Fig3_HTML.png",
+    note: "图注明确写到 CI-NEB minimum energy path 和 00-05 images，和 NEB 迁移能垒任务最对应。",
+    doi: "10.1038/s41467-020-16119-6",
+    url: "https://doi.org/10.1038/s41467-020-16119-6"
+  }
+};
+
 const structureOptions = [
   {
     title: "结构优化 / 总能",
     purpose: "得到稳定结构、晶格常数、最终总能，作为后续所有计算的基础。",
+    detail: [
+      "结构优化的核心目标是通过调整原子位置或晶格参数，使体系总能量达到最小值。在 VASP 中，这一过程通常通过迭代算法实现，例如共轭梯度法（Conjugate Gradient）或准牛顿法（Quasi-Newton）。优化过程中，系统会根据当前的原子力和能量变化进行调整，直到满足预设的收敛条件。",
+      "结构优化的理论基础是密度泛函理论（DFT），其核心是通过交换-相关泛函描述电子结构。VASP 中常用的交换-相关泛函包括 PW91 和 PBE 等，这些泛函通过近似描述电子之间的相互作用，从而计算体系的总能量和结构。"
+    ],
+    figureRefs: [
+      figureReferenceLibrary.supportedClusters
+    ],
     needs: ["初始 POSCAR 或 CIF", "结构优化 INCAR", "收敛后的 KPOINTS", "元素顺序一致的 POTCAR"],
     models: ["原胞或常规胞模型", "必要时建立超胞模型", "ENCUT 收敛测试模型", "KPOINTS 收敛测试模型"],
     formula: "E_{bulk}^{atom} = \\frac{E_{bulk}}{N_{atoms}}",
@@ -68,6 +315,9 @@ const structureOptions = [
   {
     title: "表面能",
     purpose: "计算某个晶面的表面稳定性，常用于比较不同晶面或 slab 设置。",
+    figureRefs: [
+      figureReferenceLibrary.cuSurfaceEnergy
+    ],
     needs: ["优化后的体相结构", "干净 slab 结构", "足够真空层", "固定层设置", "slab 面积 A"],
     models: ["体相静态模型", "干净 slab 静态模型", "不同 slab 层数模型", "不同真空层厚度模型"],
     formula: "\\gamma = \\frac{E_{slab} - N E_{bulk}^{atom}}{2A}",
@@ -77,6 +327,9 @@ const structureOptions = [
   {
     title: "吸附能",
     purpose: "计算原子或分子吸附到表面后的稳定性，并比较不同吸附位点。",
+    figureRefs: [
+      figureReferenceLibrary.adsorptionIntrinsic
+    ],
     needs: ["干净 slab", "单独吸附物", "slab+吸附物结构", "相同精度的 INCAR/KPOINTS/POTCAR"],
     models: ["干净 slab 静态模型", "孤立吸附物静态模型", "top 位吸附模型", "bridge 位吸附模型", "hollow 位吸附模型"],
     formula: "E_{ads} = E_{slab+adsorbate} - E_{slab} - E_{adsorbate}",
@@ -86,6 +339,9 @@ const structureOptions = [
   {
     title: "空位形成能",
     purpose: "计算去掉一个原子后形成空位缺陷的能量代价。",
+    figureRefs: [
+      figureReferenceLibrary.spinDefectQubits
+    ],
     needs: ["完美超胞", "空位超胞", "被移除元素的化学势", "相同超胞尺寸和计算精度"],
     models: ["完美超胞静态模型", "空位缺陷弛豫模型", "空位缺陷静态模型", "元素参考相化学势模型"],
     formula: "E_{vac} = E_{vacancy} - E_{perfect} + \\mu_{removed}",
@@ -95,6 +351,9 @@ const structureOptions = [
   {
     title: "替位形成能",
     purpose: "计算 A 原子替换 B 原子后的掺杂或替位缺陷形成能。",
+    figureRefs: [
+      figureReferenceLibrary.substitutionalOxygen
+    ],
     needs: ["完美超胞", "替位超胞", "加入元素化学势", "被替换元素化学势"],
     models: ["完美超胞静态模型", "替位缺陷弛豫模型", "替位缺陷静态模型", "掺杂元素参考相", "被替换元素参考相"],
     formula: "E_{sub} = E_{substitution} - E_{perfect} - \\mu_{added} + \\mu_{removed}",
@@ -104,6 +363,9 @@ const structureOptions = [
   {
     title: "间隙形成能",
     purpose: "计算额外原子进入晶体间隙位置后的形成能。",
+    figureRefs: [
+      figureReferenceLibrary.strainedGeInterstitial
+    ],
     needs: ["完美超胞", "间隙原子超胞", "加入元素化学势", "多个候选间隙位点"],
     models: ["完美超胞静态模型", "tetrahedral 间隙模型", "octahedral 间隙模型", "加入元素参考相"],
     formula: "E_{int} = E_{interstitial} - E_{perfect} - \\mu_{added}",
@@ -113,6 +375,9 @@ const structureOptions = [
   {
     title: "能带结构",
     purpose: "在静态自洽电荷密度基础上做非自洽能带计算，判断带隙和能带色散。",
+    figureRefs: [
+      figureReferenceLibrary.gwBand2D
+    ],
     needs: ["优化后的 POSCAR", "静态计算 CHGCAR", "高对称路径 KPOINTS", "ICHARG = 11 的 INCAR"],
     models: ["结构优化模型", "静态自洽模型", "高对称路径能带模型"],
     formula: "",
@@ -122,6 +387,9 @@ const structureOptions = [
   {
     title: "态密度 / 分波态密度",
     purpose: "分析总 DOS、元素投影 DOS、轨道投影 DOS，判断费米能级附近电子态来源。",
+    figureRefs: [
+      figureReferenceLibrary.absoluteEnergyLevels
+    ],
     needs: ["优化后的 POSCAR", "静态或 DOS 专用 KPOINTS", "LORBIT = 11", "NEDOS 合理取值"],
     models: ["结构优化模型", "高精度静态模型", "密 K 点 DOS 模型"],
     formula: "",
@@ -131,6 +399,9 @@ const structureOptions = [
   {
     title: "电荷差分",
     purpose: "分析成键、电荷转移、吸附前后电子密度变化。",
+    figureRefs: [
+      figureReferenceLibrary.heuslerOhmicInterface
+    ],
     needs: ["复合体系 CHGCAR", "片段 A 的 CHGCAR", "片段 B 的 CHGCAR", "完全一致的晶胞和 FFT 网格"],
     models: ["整体体系模型", "去掉 B 后的 A 片段模型", "去掉 A 后的 B 片段模型"],
     formula: "\\Delta \\rho = \\rho_{total} - \\rho_A - \\rho_B",
@@ -140,6 +411,9 @@ const structureOptions = [
   {
     title: "Bader 电荷",
     purpose: "定量分析每个原子得失电子，常用于吸附、缺陷、电荷转移研究。",
+    figureRefs: [
+      figureReferenceLibrary.fePcBader
+    ],
     needs: ["静态计算 CHGCAR", "LAECHG = .TRUE.", "AECCAR0", "AECCAR2", "Bader 程序"],
     models: ["高精度静态模型", "全电子电荷密度输出模型"],
     formula: "",
@@ -149,6 +423,9 @@ const structureOptions = [
   {
     title: "NEB 迁移能垒",
     purpose: "计算扩散、反应、吸附位点迁移的最小能量路径和能垒。",
+    figureRefs: [
+      figureReferenceLibrary.co2ReductionNeb
+    ],
     needs: ["初态结构", "终态结构", "中间插值结构", "NEB INCAR", "每个 image 的 POSCAR"],
     models: ["00 初态模型", "01-N 中间 image 模型", "最后一个终态模型"],
     formula: "E_{barrier} = \\max(E_{image}) - E_{initial}",
@@ -481,12 +758,8 @@ const tagPanel = document.querySelector("#tagPanel");
 const tabs = document.querySelectorAll(".tab");
 const pageSections = document.querySelectorAll(".page-section");
 const navLinks = document.querySelectorAll(".nav-links a");
-const flowNavLink = document.querySelector(".flow-nav-link");
-const flowSubnav = document.querySelector(".flow-subnav");
-const flowSubnavLinks = document.querySelectorAll(".flow-subnav a");
-const inputNavLink = document.querySelector(".input-nav-link");
-const inputSubnav = document.querySelector(".input-subnav");
-const inputSubnavLinks = document.querySelectorAll(".input-subnav a");
+const navGroups = document.querySelectorAll(".nav-group");
+const taskMenuLinks = document.querySelectorAll("[data-prep-target]");
 const lineCopyButtons = document.querySelectorAll(".line-copy");
 const pawFolderInput = document.querySelector("#pawFolderInput");
 const poscarInput = document.querySelector("#poscarInput");
@@ -497,12 +770,36 @@ const variantPanel = document.querySelector("#variantPanel");
 const selectedPotcars = document.querySelector("#selectedPotcars");
 const downloadPotcar = document.querySelector("#downloadPotcar");
 const clearPotcar = document.querySelector("#clearPotcar");
+const fixPoscarInput = document.querySelector("#fixPoscarInput");
+const fixModeButtons = document.querySelectorAll("[data-fix-mode]");
+const fixModeHint = document.querySelector("#fixModeHint");
+const fixToleranceLabel = document.querySelector("#fixToleranceLabel");
+const fixLayerTolerance = document.querySelector("#fixLayerTolerance");
+const downloadFixedPoscar = document.querySelector("#downloadFixedPoscar");
+const fixerResult = document.querySelector("#fixerResult");
 let activeTemplate = "relax";
 let activeTag = "ENCUT";
 let pawByElement = new Map();
 let selectedPawList = [];
 let activePawElement = "";
-const pageIds = new Set(["home", "environment", "flow", "bash", "faq", "poscar", "kpoints", "templates", "potcar"]);
+let activePrepIndex = 0;
+let fixMode = "auto";
+let fixedPoscarText = "";
+let lastFixPoscarText = "";
+const taskPages = ["flow", "static-calc", "band-dos", "adsorption", "defect-calc", "work-function", "charge-density"];
+const inputPages = ["templates", "poscar", "potcar", "kpoints"];
+const toolPages = ["potcar", "poscar-fixer", "incar-generator", "adsorption-calculator", "outcar-parser", "error-diagnosis"];
+const pageIds = new Set([
+  "home",
+  "quickstart",
+  "environment",
+  ...taskPages,
+  "bash",
+  "faq",
+  ...inputPages,
+  ...toolPages,
+  "perovskite"
+]);
 
 templates.all.lines = Object.keys(tagInfo)
   .sort()
@@ -523,32 +820,36 @@ const elementSymbols = elements.map(([symbol]) => symbol).sort((a, b) => b.lengt
 function renderStep(index) {
   const step = steps[index];
   if (index === 0) {
+    document.body.classList.remove("task-drawer-open");
     detail.innerHTML = `
-      <div class="structure-choice">
-        <h3>选择计算任务</h3>
-        <div class="prep-options">
+      <aside class="task-drawer" aria-label="计算任务侧边导航">
+        <button class="task-drawer-toggle" type="button" aria-label="打开计算任务导航" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="task-drawer-panel">
+          <h3>计算任务</h3>
           ${structureOptions
             .map(
               (option, optionIndex) => `
-                <button class="prep-option${optionIndex === 0 ? " is-active" : ""}" type="button" data-prep="${optionIndex}">
-                  <strong>${option.title}</strong>
-                  <span>${option.purpose.split("，")[0]}。</span>
+                <button class="prep-option drawer-option${optionIndex === 0 ? " is-active" : ""}" type="button" data-prep="${optionIndex}">
+                  ${option.title}
                 </button>
               `
             )
             .join("")}
         </div>
-      </div>
-      <div class="prep-detail" id="prepDetail"></div>
+      </aside>
+      <div class="task-pages" id="prepDetail"></div>
     `;
 
     detail.querySelectorAll(".prep-option").forEach((button) => {
       button.addEventListener("click", () => {
-        detail.querySelectorAll(".prep-option").forEach((item) => item.classList.remove("is-active"));
-        button.classList.add("is-active");
-        renderPrepOption(Number(button.dataset.prep));
+        selectPrepOption(Number(button.dataset.prep));
       });
     });
+    setupTaskDrawer();
 
     renderPrepOption(0);
     return;
@@ -578,25 +879,93 @@ function renderPrepOption(index) {
       <ul>${option.output.map((item) => `<li>${item}</li>`).join("")}</ul>
     `
     : "";
+  const detailMarkup = option.detail?.length
+    ? `
+      <div class="task-page-detail">
+        ${option.detail.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+      </div>
+    `
+    : "";
+  const figureRefMarkup = option.figureRefs?.length
+    ? `
+      <div class="task-page-section figure-reference-section">
+        <h4>图例文献参考</h4>
+        <div class="figure-reference-list">
+          ${option.figureRefs
+            .map(
+              (reference) => `
+                <a class="figure-reference-card" href="${reference.url}" target="_blank" rel="noreferrer">
+                  <div class="figure-reference-visual">
+                    <img src="${reference.image}" alt="${reference.title}" loading="lazy" referrerpolicy="no-referrer" />
+                  </div>
+                  <div class="figure-reference-body">
+                    <span>${reference.journal}</span>
+                    <strong>${reference.title}</strong>
+                    <p>${reference.note}</p>
+                    <small>${reference.figure ? `${reference.figure} · ` : ""}DOI: ${reference.doi}</small>
+                  </div>
+                </a>
+              `
+            )
+            .join("")}
+        </div>
+      </div>
+    `
+    : "";
   target.innerHTML = `
-    <h3>${option.title}</h3>
-    <p>${option.purpose}</p>
-    <h4>需要计算</h4>
-    <ul class="prep-checklist">
-      ${option.checklist
-        .map(
-          (entry) => `
-            <li>
-              <span>${entry.item}</span>
-              ${entry.note ? `<small>${latexToHtml(entry.note)}</small>` : ""}
-            </li>
-          `
-        )
-        .join("")}
-    </ul>
-    ${formulaMarkup}
-    ${outputMarkup}
+    <article class="task-page">
+      <div class="task-page-hero">
+        <h3>${option.title}</h3>
+        <p>${option.purpose}</p>
+      </div>
+      ${detailMarkup}
+      ${figureRefMarkup}
+      <div class="task-page-section">
+        <h4>需要计算</h4>
+        <ul class="prep-checklist">
+          ${option.checklist
+            .map(
+              (entry) => `
+                <li>
+                  <span>${entry.item}</span>
+                  ${entry.note ? `<small>${latexToHtml(entry.note)}</small>` : ""}
+                </li>
+              `
+            )
+            .join("")}
+        </ul>
+      </div>
+      ${formulaMarkup ? `<div class="task-page-section">${formulaMarkup}</div>` : ""}
+      ${outputMarkup ? `<div class="task-page-section">${outputMarkup}</div>` : ""}
+    </article>
   `;
+}
+
+function setupTaskDrawer() {
+  const drawer = detail.querySelector(".task-drawer");
+  const toggle = detail.querySelector(".task-drawer-toggle");
+  if (!drawer || !toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const isOpen = drawer.classList.toggle("is-open");
+    document.body.classList.toggle("task-drawer-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+function selectPrepOption(index) {
+  const optionIndex = Math.max(0, Math.min(index, structureOptions.length - 1));
+  activePrepIndex = optionIndex;
+  if (!document.querySelector("#prepDetail")) {
+    renderStep(0);
+  }
+  const buttons = detail.querySelectorAll(".prep-option");
+  buttons.forEach((item) => item.classList.remove("is-active"));
+  buttons[optionIndex]?.classList.add("is-active");
+  taskMenuLinks.forEach((link) => {
+    link.classList.toggle("is-active", Number(link.dataset.prepTarget) === optionIndex);
+  });
+  renderPrepOption(optionIndex);
 }
 
 function latexToHtml(source) {
@@ -687,24 +1056,27 @@ function currentPageFromHash() {
 }
 
 function showPage(page) {
-  const flowPages = ["environment", "flow"];
-  const inputPages = ["templates", "poscar", "potcar", "kpoints"];
+  if (page !== "flow") {
+    document.body.classList.remove("task-drawer-open");
+  }
+
   pageSections.forEach((section) => {
     section.hidden = section.dataset.page !== page;
   });
 
   navLinks.forEach((link) => {
-    link.classList.toggle("is-active", link.getAttribute("href") === `#${page}`);
+    const prepTarget = link.dataset.prepTarget;
+    const isActivePrep = prepTarget !== undefined && page === "flow" && Number(prepTarget) === activePrepIndex;
+    const isActivePage = prepTarget === undefined && link.getAttribute("href") === `#${page}`;
+    link.classList.toggle("is-active", isActivePage || isActivePrep);
   });
-  flowNavLink?.classList.toggle("is-active", flowPages.includes(page));
-  if (flowSubnav) flowSubnav.hidden = !flowPages.includes(page);
-  flowSubnavLinks.forEach((link) => {
-    link.classList.toggle("is-active", link.getAttribute("href") === `#${page}`);
-  });
-  inputNavLink?.classList.toggle("is-active", inputPages.includes(page));
-  if (inputSubnav) inputSubnav.hidden = !inputPages.includes(page);
-  inputSubnavLinks.forEach((link) => {
-    link.classList.toggle("is-active", link.getAttribute("href") === `#${page}`);
+  navGroups.forEach((group) => {
+    const name = group.dataset.navGroup;
+    const isActive =
+      (name === "tasks" && taskPages.includes(page)) ||
+      (name === "inputs" && inputPages.includes(page)) ||
+      (name === "tools" && toolPages.includes(page));
+    group.classList.toggle("is-active", isActive);
   });
 
   if (page === "home") {
@@ -716,6 +1088,19 @@ function showPage(page) {
 
 window.addEventListener("hashchange", () => {
   showPage(currentPageFromHash());
+});
+
+taskMenuLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const targetIndex = Number(link.dataset.prepTarget);
+    if (window.location.hash !== "#flow") {
+      window.location.hash = "flow";
+    }
+    showPage("flow");
+    renderStep(0);
+    selectPrepOption(targetIndex);
+  });
 });
 
 stepButtons.forEach((button) => {
@@ -1036,6 +1421,358 @@ function parsePoscarElements(text) {
   return titleTokens.filter((token) => elementSymbols.includes(token));
 }
 
+function parseScale(line) {
+  const values = line.trim().split(/\s+/).map(Number).filter((value) => Number.isFinite(value));
+  return values[0] || 1;
+}
+
+function parseVector(line, scale) {
+  return line
+    .trim()
+    .split(/\s+/)
+    .slice(0, 3)
+    .map((value) => Number(value) * scale);
+}
+
+function determinant3(matrix) {
+  const [a, b, c] = matrix;
+  return (
+    a[0] * (b[1] * c[2] - b[2] * c[1]) -
+    a[1] * (b[0] * c[2] - b[2] * c[0]) +
+    a[2] * (b[0] * c[1] - b[1] * c[0])
+  );
+}
+
+function latticeColumns(lattice) {
+  return [
+    [lattice[0][0], lattice[1][0], lattice[2][0]],
+    [lattice[0][1], lattice[1][1], lattice[2][1]],
+    [lattice[0][2], lattice[1][2], lattice[2][2]]
+  ];
+}
+
+function solve3x3Columns(columns, vector) {
+  const det = determinant3(columns);
+  if (Math.abs(det) < 1e-12) throw new Error("晶格矩阵奇异，无法换算 Cartesian 坐标。");
+  return columns.map((_, columnIndex) => {
+    const replaced = columns.map((column) => [...column]);
+    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
+      replaced[rowIndex][columnIndex] = vector[rowIndex];
+    }
+    return determinant3(replaced) / det;
+  });
+}
+
+function vectorLength(vector) {
+  return Math.sqrt(vector.reduce((sum, value) => sum + value * value, 0));
+}
+
+function parsePoscarForFixing(text) {
+  const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+  const nonEmpty = lines.map((line, index) => ({ line, index })).filter((entry) => entry.line.trim());
+  if (nonEmpty.length < 8) throw new Error("POSCAR 内容太短，无法识别晶格和坐标。");
+
+  const scale = parseScale(nonEmpty[1].line);
+  const lattice = [nonEmpty[2].line, nonEmpty[3].line, nonEmpty[4].line].map((line) => parseVector(line, scale));
+  const columns = latticeColumns(lattice);
+  const cLength = vectorLength(lattice[2]);
+  const line5Tokens = nonEmpty[5].line.trim().split(/\s+/);
+  const hasElementLine = line5Tokens.every((token) => elementSymbols.includes(token));
+  const elements = hasElementLine
+    ? line5Tokens
+    : nonEmpty[0].line.trim().split(/\s+/).filter((token) => elementSymbols.includes(token));
+  const countLineIndex = hasElementLine ? 6 : 5;
+  const counts = nonEmpty[countLineIndex].line.trim().split(/\s+/).map(Number);
+  if (!counts.length || counts.some((value) => !Number.isInteger(value) || value < 0)) {
+    throw new Error("未识别到有效的元素数量行。");
+  }
+  if (!elements.length || elements.length !== counts.length) {
+    throw new Error("未识别到元素行，或元素数量与计数行不一致。请使用 VASP5 格式 POSCAR。");
+  }
+
+  let modeLineIndex = countLineIndex + 1;
+  let hasSelectiveDynamics = /^s/i.test(nonEmpty[modeLineIndex]?.line.trim() || "");
+  if (hasSelectiveDynamics) modeLineIndex += 1;
+  const modeLine = nonEmpty[modeLineIndex]?.line.trim() || "";
+  const isDirect = /^d/i.test(modeLine);
+  const isCartesian = /^c|^k/i.test(modeLine);
+  if (!isDirect && !isCartesian) throw new Error("未识别 Direct 或 Cartesian 坐标模式。");
+
+  const totalAtoms = counts.reduce((sum, count) => sum + count, 0);
+  const coordStart = modeLineIndex + 1;
+  if (nonEmpty.length < coordStart + totalAtoms) throw new Error("坐标行数量少于元素计数总数。");
+
+  const atomElements = counts.flatMap((count, elementIndex) => Array.from({ length: count }, () => elements[elementIndex]));
+  const atoms = Array.from({ length: totalAtoms }, (_, atomIndex) => {
+    const entry = nonEmpty[coordStart + atomIndex];
+    const parts = entry.line.trim().split(/\s+/);
+    const coords = parts.slice(0, 3).map(Number);
+    if (coords.some((value) => !Number.isFinite(value))) throw new Error(`第 ${atomIndex + 1} 个原子坐标无法识别。`);
+    const cartesian = isDirect
+      ? [
+          coords[0] * lattice[0][0] + coords[1] * lattice[1][0] + coords[2] * lattice[2][0],
+          coords[0] * lattice[0][1] + coords[1] * lattice[1][1] + coords[2] * lattice[2][1],
+          coords[0] * lattice[0][2] + coords[1] * lattice[1][2] + coords[2] * lattice[2][2]
+        ]
+      : coords.map((value) => value * scale);
+    const fracZ = isDirect ? coords[2] : solve3x3Columns(columns, cartesian)[2];
+    return {
+      index: atomIndex + 1,
+      element: atomElements[atomIndex],
+      lineIndex: entry.index,
+      coords,
+      fracZ,
+      z: fracZ * cLength,
+      prefix: parts.slice(0, 3).join(" ")
+    };
+  });
+
+  return {
+    lines,
+    nonEmpty,
+    elements,
+    counts,
+    hasSelectiveDynamics,
+    modeLineOriginalIndex: nonEmpty[modeLineIndex].index,
+    cLength,
+    atoms
+  };
+}
+
+function chooseBottomLayer(atoms, cLength, minLayerGap) {
+  const minFracZ = Math.min(...atoms.map((atom) => atom.fracZ));
+  const ordered = [...atoms].sort((a, b) => a.fracZ - b.fracZ);
+  for (let index = 1; index < ordered.length; index++) {
+    const gap = (ordered[index].fracZ - ordered[index - 1].fracZ) * cLength;
+    if (gap >= minLayerGap) {
+      const fixed = ordered.slice(0, index).sort((a, b) => a.index - b.index);
+      const maxFracZ = Math.max(...fixed.map((atom) => atom.fracZ));
+      return {
+        atoms: fixed,
+        mode: "自动层间距",
+        toleranceAngstrom: (maxFracZ - minFracZ) * cLength,
+        minLayerGap
+      };
+    }
+  }
+
+  const fallbackTolerance = 0.35;
+  return {
+    atoms: atoms.filter((atom) => atom.fracZ <= minFracZ + fallbackTolerance / cLength),
+    mode: "备用厚度",
+    toleranceAngstrom: fallbackTolerance,
+    minLayerGap
+  };
+}
+
+function chooseBottomLayerByThickness(atoms, cLength, thickness) {
+  const minFracZ = Math.min(...atoms.map((atom) => atom.fracZ));
+  const fixed = atoms
+    .filter((atom) => atom.fracZ <= minFracZ + thickness / cLength)
+    .sort((a, b) => a.index - b.index);
+  return {
+    atoms: fixed,
+    mode: "手动厚度",
+    toleranceAngstrom: thickness,
+    minLayerGap: null
+  };
+}
+
+function updateFixModeUi() {
+  fixModeButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.fixMode === fixMode);
+  });
+  if (fixMode === "manual") {
+    if (fixToleranceLabel) fixToleranceLabel.textContent = "固定厚度 / Å";
+    if (fixLayerTolerance) {
+      fixLayerTolerance.value = fixLayerTolerance.dataset.manualValue || "0.80";
+      fixLayerTolerance.min = "0.01";
+      fixLayerTolerance.step = "0.05";
+    }
+    if (fixModeHint) fixModeHint.textContent = "从最低原子开始，固定指定厚度范围内的所有原子。";
+  } else {
+    if (fixToleranceLabel) fixToleranceLabel.textContent = "分层间隙阈值 / Å";
+    if (fixLayerTolerance) {
+      fixLayerTolerance.value = fixLayerTolerance.dataset.autoValue || "0.45";
+      fixLayerTolerance.min = "0.05";
+      fixLayerTolerance.step = "0.05";
+    }
+    if (fixModeHint) fixModeHint.textContent = "自动寻找最底层与上一层之间的明显层间距。";
+  }
+}
+
+function summarizeFixedAtoms(atoms) {
+  return atoms.reduce((summary, atom) => {
+    summary[atom.element] = (summary[atom.element] || 0) + 1;
+    return summary;
+  }, {});
+}
+
+function summarizeElementCounts(atoms) {
+  return Object.entries(summarizeFixedAtoms(atoms))
+    .map(([element, count]) => `${element} ${count}`)
+    .join("，");
+}
+
+function analyzeSlabLayers(atoms, cLength, minLayerGap) {
+  const ordered = [...atoms].sort((a, b) => a.fracZ - b.fracZ);
+  const layers = [];
+  let currentLayer = [ordered[0]];
+
+  for (let index = 1; index < ordered.length; index++) {
+    const gap = (ordered[index].fracZ - ordered[index - 1].fracZ) * cLength;
+    if (gap >= minLayerGap) {
+      layers.push(currentLayer);
+      currentLayer = [ordered[index]];
+    } else {
+      currentLayer.push(ordered[index]);
+    }
+  }
+  layers.push(currentLayer);
+
+  return layers.map((layer, index) => {
+    const minFracZ = Math.min(...layer.map((atom) => atom.fracZ));
+    const maxFracZ = Math.max(...layer.map((atom) => atom.fracZ));
+    const nextLayer = layers[index + 1];
+    const gapToNext = nextLayer
+      ? (Math.min(...nextLayer.map((atom) => atom.fracZ)) - maxFracZ) * cLength
+      : null;
+    return {
+      index: index + 1,
+      atoms: layer.sort((a, b) => a.index - b.index),
+      minFracZ,
+      maxFracZ,
+      thickness: (maxFracZ - minFracZ) * cLength,
+      gapToNext,
+      elements: summarizeElementCounts(layer)
+    };
+  });
+}
+
+function buildFixedPoscar(parsed, fixedAtoms) {
+  const fixedSet = new Set(fixedAtoms.map((atom) => atom.index));
+  const output = [...parsed.lines];
+  const offset = parsed.hasSelectiveDynamics ? 0 : 1;
+  if (!parsed.hasSelectiveDynamics) {
+    output.splice(parsed.modeLineOriginalIndex, 0, "Selective dynamics");
+  }
+
+  parsed.atoms.forEach((atom) => {
+    const targetLine = atom.lineIndex + offset;
+    const flags = fixedSet.has(atom.index) ? "F F F" : "T T T";
+    output[targetLine] = `${atom.prefix} ${flags}`;
+  });
+
+  return output.join("\n").replace(/\n*$/, "\n");
+}
+
+function renderFixerError(message) {
+  fixedPoscarText = "";
+  if (downloadFixedPoscar) downloadFixedPoscar.disabled = true;
+  if (!fixerResult) return;
+  fixerResult.innerHTML = `
+    <p class="panel-label">Result</p>
+    <h3>无法处理 POSCAR</h3>
+    <p>${escapeHtml(message)}</p>
+  `;
+}
+
+function runPoscarFixer(text) {
+  if (!text.trim()) {
+    renderFixerError("POSCAR 为空。");
+    return;
+  }
+
+  let parsed;
+  try {
+    parsed = parsePoscarForFixing(text);
+  } catch (error) {
+    renderFixerError(error.message);
+    return;
+  }
+
+  const inputValue = Math.max(0.01, Number(fixLayerTolerance?.value) || (fixMode === "manual" ? 0.8 : 0.45));
+  const layerGapForAnalysis = fixMode === "manual" ? 0.45 : inputValue;
+  const choice = fixMode === "manual"
+    ? chooseBottomLayerByThickness(parsed.atoms, parsed.cLength, inputValue)
+    : chooseBottomLayer(parsed.atoms, parsed.cLength, inputValue);
+  const fixedAtoms = choice.atoms;
+  const layers = analyzeSlabLayers(parsed.atoms, parsed.cLength, layerGapForAnalysis);
+  const bottomLayer = layers[0];
+  const minZ = Math.min(...fixedAtoms.map((atom) => atom.z));
+  const maxFixedZ = Math.max(...fixedAtoms.map((atom) => atom.z));
+  const minFracZ = Math.min(...fixedAtoms.map((atom) => atom.fracZ));
+  const maxFracZ = Math.max(...fixedAtoms.map((atom) => atom.fracZ));
+  const summary = summarizeFixedAtoms(fixedAtoms);
+  fixedPoscarText = buildFixedPoscar(parsed, fixedAtoms);
+  if (downloadFixedPoscar) downloadFixedPoscar.disabled = fixedAtoms.length === 0;
+
+  const elementSummary = Object.entries(summary).map(([element, count]) => `${element} ${count}`).join("，");
+  const fixedIndices = fixedAtoms.map((atom) => atom.index).join(", ");
+  const layerRows = layers
+    .slice(0, 6)
+    .map(
+      (layer) => `
+        <tr>
+          <td>${layer.index}</td>
+          <td>${layer.atoms.length}</td>
+          <td>${escapeHtml(layer.elements || "无")}</td>
+          <td>${layer.thickness.toFixed(4)}</td>
+          <td>${layer.gapToNext === null ? "-" : layer.gapToNext.toFixed(4)}</td>
+        </tr>
+      `
+    )
+    .join("");
+  const layerOmitted = layers.length > 6 ? `<p class="fixer-muted">仅显示前 6 层；当前共识别 ${layers.length} 层。</p>` : "";
+  const previewRows = fixedAtoms
+    .slice(0, 36)
+    .map(
+      (atom) => `
+        <tr>
+          <td>${atom.index}</td>
+          <td>${atom.element}</td>
+          <td>${atom.fracZ.toFixed(6)}</td>
+        </tr>
+      `
+    )
+    .join("");
+  const omitted = fixedAtoms.length > 36 ? `<p class="fixer-muted">仅预览前 36 个固定原子，其余可在下载的 POSCAR 中检查。</p>` : "";
+
+  fixerResult.innerHTML = `
+    <p class="panel-label">Result</p>
+    <h3>已判定最底层固定原子</h3>
+    <div class="fixer-summary-grid">
+      <div><span>固定原子数</span><strong>${fixedAtoms.length} / ${parsed.atoms.length}</strong></div>
+      <div><span>固定元素</span><strong>${escapeHtml(elementSummary || "无")}</strong></div>
+      <div><span>c 坐标范围</span><strong>${minFracZ.toFixed(6)} - ${maxFracZ.toFixed(6)}</strong></div>
+      <div><span>层厚估计</span><strong>${(maxFixedZ - minZ).toFixed(4)} Å</strong></div>
+      <div><span>底层厚度</span><strong>${bottomLayer.thickness.toFixed(4)} Å</strong></div>
+      <div><span>底层到第二层</span><strong>${bottomLayer.gapToNext === null ? "-" : `${bottomLayer.gapToNext.toFixed(4)} Å`}</strong></div>
+      <div><span>判定方式</span><strong>${choice.mode}</strong></div>
+      <div><span>${fixMode === "manual" ? "手动固定厚度" : "分层间隙阈值"}</span><strong>${inputValue.toFixed(2)} Å</strong></div>
+    </div>
+    <div class="fixer-layer-analysis">
+      <h4>层分析</h4>
+      <p class="fixer-muted">按 c 方向坐标排序，间距大于 ${layerGapForAnalysis.toFixed(2)} Å 时判定为新一层。可用底层厚度和层间距判断固定范围是否合理。</p>
+      <div class="fixer-table-wrap">
+        <table>
+          <thead><tr><th>层</th><th>原子数</th><th>元素</th><th>层内厚度 / Å</th><th>到下一层 / Å</th></tr></thead>
+          <tbody>${layerRows}</tbody>
+        </table>
+      </div>
+      ${layerOmitted}
+    </div>
+    <p class="fixer-muted">固定原子序号：${escapeHtml(fixedIndices || "无")}</p>
+    <div class="fixer-table-wrap">
+      <table>
+        <thead><tr><th>序号</th><th>元素</th><th>c 方向坐标</th></tr></thead>
+        <tbody>${previewRows}</tbody>
+      </table>
+    </div>
+    ${omitted}
+  `;
+}
+
 function pickDefaultPaw(element) {
   const variants = pawByElement.get(element) || [];
   return variants.find((variant) => variant.label === element) || variants[0] || null;
@@ -1142,6 +1879,51 @@ clearPotcar?.addEventListener("click", () => {
   renderSelectedPotcars();
 });
 
+fixPoscarInput?.addEventListener("change", async (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  lastFixPoscarText = await file.text();
+  runPoscarFixer(lastFixPoscarText);
+  event.target.value = "";
+});
+
+fixLayerTolerance?.addEventListener("input", () => {
+  if (fixMode === "manual") {
+    fixLayerTolerance.dataset.manualValue = fixLayerTolerance.value;
+  } else {
+    fixLayerTolerance.dataset.autoValue = fixLayerTolerance.value;
+  }
+  if (lastFixPoscarText) runPoscarFixer(lastFixPoscarText);
+});
+
+fixModeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (fixLayerTolerance) {
+      if (fixMode === "manual") {
+        fixLayerTolerance.dataset.manualValue = fixLayerTolerance.value;
+      } else {
+        fixLayerTolerance.dataset.autoValue = fixLayerTolerance.value;
+      }
+    }
+    fixMode = button.dataset.fixMode || "auto";
+    updateFixModeUi();
+    if (lastFixPoscarText) runPoscarFixer(lastFixPoscarText);
+  });
+});
+
+downloadFixedPoscar?.addEventListener("click", () => {
+  if (!fixedPoscarText) return;
+  const blob = new Blob([fixedPoscarText], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "POSCAR_fixed";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+});
+
 enhanceBashLines();
 
 lineCopyButtons.forEach((button) => {
@@ -1167,6 +1949,7 @@ window.potcarTool = {
   renderSelectedPotcars
 };
 
+updateFixModeUi();
 renderStep(0);
 renderTemplate(activeTemplate);
 renderPeriodicTable();

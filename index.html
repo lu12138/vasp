@@ -14,22 +14,49 @@
           <span>VASP Workflow</span>
         </a>
         <nav class="nav-links" aria-label="主导航">
-          <a class="flow-nav-link" href="#environment">计算流程</a>
-          <a href="#bash">常用代码</a>
-          <a class="input-nav-link" href="#templates">输入文件</a>
+          <a href="#home">首页</a>
+          <a href="#quickstart">快速开始</a>
+          <div class="nav-group" data-nav-group="tasks">
+            <a class="nav-parent" href="#flow">计算任务</a>
+            <div class="nav-menu">
+              <a href="#flow" data-prep-target="0">结构优化 / 总能</a>
+              <a href="#flow" data-prep-target="1">表面能</a>
+              <a href="#flow" data-prep-target="2">吸附能</a>
+              <a href="#flow" data-prep-target="3">空位形成能</a>
+              <a href="#flow" data-prep-target="4">替位形成能</a>
+              <a href="#flow" data-prep-target="5">间隙形成能</a>
+              <a href="#flow" data-prep-target="6">能带结构</a>
+              <a href="#flow" data-prep-target="7">态密度 / 分波态密度</a>
+              <a href="#flow" data-prep-target="8">电荷差分</a>
+              <a href="#flow" data-prep-target="9">Bader 电荷</a>
+              <a href="#flow" data-prep-target="10">NEB 迁移能垒</a>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group="inputs">
+            <a class="nav-parent" href="#templates">输入文件</a>
+            <div class="nav-menu">
+              <a href="#templates">INCAR</a>
+              <a href="#poscar">POSCAR</a>
+              <a href="#potcar">POTCAR</a>
+              <a href="#kpoints">KPOINTS</a>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group="tools">
+            <a class="nav-parent" href="#potcar">实用工具</a>
+            <div class="nav-menu">
+              <a href="#potcar">POTCAR 合成</a>
+              <a href="#poscar-fixer">POSCAR 固定层</a>
+              <a href="#incar-generator">INCAR 生成器</a>
+              <a href="#adsorption-calculator">吸附能计算器</a>
+              <a href="#outcar-parser">OUTCAR / OSZICAR 解析</a>
+              <a href="#error-diagnosis">报错诊断</a>
+            </div>
+          </div>
+          <a href="#bash">常用命令</a>
+          <a href="#perovskite">钙钛矿专题</a>
           <a href="#faq">常见问题</a>
         </nav>
       </div>
-      <nav class="flow-subnav" aria-label="计算流程子导航" hidden>
-        <a href="#environment">环境搭建</a>
-        <a href="#flow">计算任务</a>
-      </nav>
-      <nav class="input-subnav" aria-label="输入文件子导航" hidden>
-        <a href="#templates">INCAR</a>
-        <a href="#poscar">POSCAR</a>
-        <a href="#potcar">POTCAR</a>
-        <a href="#kpoints">KPOINTS</a>
-      </nav>
     </header>
 
     <main id="top">
@@ -38,43 +65,53 @@
           <p class="eyebrow">VASP Workflow</p>
           <h1>VASP Workflow</h1>
           <p class="hero-copy">
-            不只是笔记页面：它能按任务整理模型、生成输入文件顺序，并辅助合成 POTCAR。
+            计算笔记，计算工具。
           </p>
           <div class="hero-actions">
-            <a class="primary-action" href="#environment">计算流程</a>
-            <a class="secondary-action" href="#bash">常用代码</a>
+            <a class="primary-action" href="#quickstart">快速开始</a>
+            <a class="secondary-action" href="#flow">计算任务</a>
             <a class="secondary-action" href="#templates">输入文件</a>
-            <a class="secondary-action" href="#faq">常见问题</a>
+            <a class="secondary-action" href="#potcar">实用工具</a>
           </div>
+        </div>
+      </section>
 
-          <div class="home-flow" aria-label="VASP 计算流程总览">
-            <a class="home-flow-step" href="#flow">
-              <span class="home-flow-index">01</span>
-              <strong>确定计算任务</strong>
-              <span class="home-flow-note">吸附能、缺陷、能带、DOS 等任务，直接查看需要计算的模型和最终结果。</span>
-            </a>
-            <div class="home-flow-step input-step">
-              <span class="home-flow-index">02</span>
-              <strong>准备输入文件</strong>
-              <span class="home-flow-note">按四类输入文件拆开整理，POTCAR 页支持读取 POSCAR 元素顺序后一键合成。</span>
-              <div class="input-file-pills" aria-label="输入文件入口">
-                <a href="#templates">INCAR</a>
-                <a href="#poscar">POSCAR</a>
-                <a class="has-mini-tip" href="#potcar" data-tip="读取 POSCAR 元素顺序，一键合成 POTCAR。">POTCAR</a>
-                <a href="#kpoints">KPOINTS</a>
-              </div>
+      <section id="quickstart" class="section page-section quickstart-section" data-page="quickstart">
+        <div class="section-heading">
+          <p class="eyebrow">Quick Start</p>
+          <h2>快速开始</h2>
+          <p class="section-copy">从任务到结果的最短路径。先确认要算什么，再准备输入文件，最后运行并检查输出。</p>
+        </div>
+        <div class="quickstart-flow" aria-label="快速开始流程">
+          <a class="quickstart-step" href="#flow">
+            <span>01</span>
+            <strong>确定计算任务</strong>
+            <p>吸附能、缺陷、能带、DOS 等任务简介。</p>
+          </a>
+          <div class="quickstart-arrow" aria-hidden="true">→</div>
+          <div class="quickstart-step">
+            <span>02</span>
+            <strong>准备输入文件</strong>
+            <p>输入文件编写，POTCAR 支持读取 POSCAR 元素顺序后一键合成。</p>
+            <div class="input-file-pills" aria-label="输入文件入口">
+              <a href="#templates">INCAR</a>
+              <a href="#poscar">POSCAR</a>
+              <a class="has-mini-tip" href="#potcar" data-tip="读取 POSCAR 元素顺序，一键合成 POTCAR。">POTCAR</a>
+              <a href="#kpoints">KPOINTS</a>
             </div>
-            <a class="home-flow-step" href="#bash">
-              <span class="home-flow-index">03</span>
-              <strong>输入计算代码</strong>
-              <span class="home-flow-note">常用 Bash 命令集中在一个代码视图，复制时不带注释。</span>
-            </a>
-            <a class="home-flow-step" href="#flow">
-              <span class="home-flow-index">04</span>
-              <strong>检查与后处理</strong>
-              <span class="home-flow-note">按任务提示收敛、能量、能带、态密度等结果该从哪里提取。</span>
-            </a>
           </div>
+          <div class="quickstart-arrow" aria-hidden="true">→</div>
+          <a class="quickstart-step" href="#bash">
+            <span>03</span>
+            <strong>输入计算代码</strong>
+            <p>常用 Bash 命令集。</p>
+          </a>
+          <div class="quickstart-arrow" aria-hidden="true">→</div>
+          <a class="quickstart-step" href="#flow">
+            <span>04</span>
+            <strong>检查与后处理</strong>
+            <p>提示收敛、能量、能带、态密度等结果该从哪里提取。</p>
+          </a>
         </div>
       </section>
 
@@ -140,7 +177,7 @@
         </div>
       </section>
 
-      <section id="flow" class="section page-section" data-page="flow">
+      <section id="flow" class="section page-section workflow-section" data-page="flow">
         <div class="section-heading">
           <p class="eyebrow">Workflow</p>
           <h2>计算任务导航</h2>
@@ -149,6 +186,54 @@
           </p>
         </div>
         <article class="detail-panel" id="stepDetail" aria-live="polite"></article>
+      </section>
+
+      <section id="static-calc" class="section page-section placeholder-section" data-page="static-calc">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>静态计算</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="band-dos" class="section page-section placeholder-section" data-page="band-dos">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>能带 / DOS</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="adsorption" class="section page-section placeholder-section" data-page="adsorption">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>吸附能</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="defect-calc" class="section page-section placeholder-section" data-page="defect-calc">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>缺陷计算</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="work-function" class="section page-section placeholder-section" data-page="work-function">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>功函数</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="charge-density" class="section page-section placeholder-section" data-page="charge-density">
+        <div class="section-heading">
+          <p class="eyebrow">Task</p>
+          <h2>差分电荷密度</h2>
+          <p class="section-copy">无</p>
+        </div>
       </section>
 
       <section id="faq" class="section faq-section page-section" data-page="faq">
@@ -304,6 +389,7 @@
             <h3>转换与检查工具</h3>
             <ul>
               <li><a href="https://vaspkit.com/" target="_blank" rel="noreferrer">VASPKIT</a><span>生成 VASP 输入、建表面、转格式、检查结构。</span></li>
+              <li><a href="#poscar-fixer">POSCAR 固定层工具</a><span>自动识别 slab 最底层原子，并生成带固定标记的 POSCAR。</span></li>
               <li><a href="https://pymatgen.org/" target="_blank" rel="noreferrer">pymatgen</a><span>适合脚本化读取 CIF、生成超胞和写出 POSCAR。</span></li>
               <li><a href="https://ase-lib.org/ase/io/formatoptions.html" target="_blank" rel="noreferrer">ASE</a><span>支持多种结构格式读写，可自动化批量转换。</span></li>
             </ul>
@@ -490,6 +576,82 @@ Remember: converge first, submit later.</code></pre>
         </div>
       </section>
 
+      <section id="poscar-fixer" class="section poscar-fixer-section page-section" data-page="poscar-fixer">
+        <div class="section-heading">
+          <p class="eyebrow">POSCAR Tool</p>
+          <h2>slab 底层原子固定</h2>
+          <p class="section-copy">
+            读取 POSCAR 后自动识别 c/z 方向最底层原子，并写入 Selective dynamics 固定标记。适合一般 slab 结构优化前快速检查。
+          </p>
+        </div>
+        <div class="poscar-fixer-board">
+          <div class="poscar-fixer-controls">
+            <label class="folder-picker">
+              <input id="fixPoscarInput" type="file" accept=".vasp,.poscar,.POSCAR,text/plain" />
+              <span>读取 POSCAR</span>
+            </label>
+            <div class="fix-mode-control" aria-label="固定方式">
+              <span>固定方式</span>
+              <div class="fix-mode-toggle">
+                <button class="is-active" type="button" data-fix-mode="auto">自动识别底层</button>
+                <button type="button" data-fix-mode="manual">手动设置厚度</button>
+              </div>
+              <p id="fixModeHint">自动寻找最底层与上一层之间的明显层间距。</p>
+            </div>
+            <label class="fix-tolerance-control">
+              <span id="fixToleranceLabel">分层间隙阈值 / Å</span>
+              <input id="fixLayerTolerance" type="number" min="0.05" step="0.05" value="0.45" />
+            </label>
+            <button id="downloadFixedPoscar" class="download-fixed-poscar" type="button" disabled>下载固定后 POSCAR</button>
+          </div>
+          <div class="fixer-result" id="fixerResult">
+            <p class="panel-label">Result</p>
+            <h3>尚未读取 POSCAR</h3>
+            <p>读取后会显示固定了多少个原子、分别是什么元素、对应原子序号和 c 方向坐标范围，方便判断是否固定到正确底层。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="incar-generator" class="section page-section placeholder-section" data-page="incar-generator">
+        <div class="section-heading">
+          <p class="eyebrow">Tool</p>
+          <h2>INCAR 生成器</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="adsorption-calculator" class="section page-section placeholder-section" data-page="adsorption-calculator">
+        <div class="section-heading">
+          <p class="eyebrow">Tool</p>
+          <h2>吸附能计算器</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="outcar-parser" class="section page-section placeholder-section" data-page="outcar-parser">
+        <div class="section-heading">
+          <p class="eyebrow">Tool</p>
+          <h2>OUTCAR / OSZICAR 解析</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="error-diagnosis" class="section page-section placeholder-section" data-page="error-diagnosis">
+        <div class="section-heading">
+          <p class="eyebrow">Tool</p>
+          <h2>报错诊断</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
+      <section id="perovskite" class="section page-section placeholder-section" data-page="perovskite">
+        <div class="section-heading">
+          <p class="eyebrow">Topic</p>
+          <h2>钙钛矿专题</h2>
+          <p class="section-copy">无</p>
+        </div>
+      </section>
+
     </main>
 
     <footer class="footer">
@@ -497,6 +659,6 @@ Remember: converge first, submit later.</code></pre>
       <a href="#home">回到首页</a>
     </footer>
 
-    <script src="script.js?v=env-priority-list"></script>
+    <script src="script.js?v=matched-theory-figures"></script>
   </body>
 </html>
