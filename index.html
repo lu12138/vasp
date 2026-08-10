@@ -581,7 +581,7 @@ Remember: converge first, submit later.</code></pre>
           <p class="eyebrow">POSCAR Tool</p>
           <h2>slab 底层原子固定</h2>
           <p class="section-copy">
-            读取 POSCAR 后自动识别 c/z 方向最底层原子，并写入 Selective dynamics 固定标记。适合一般 slab 结构优化前快速检查。
+            读取 POSCAR 后自动识别 c/z 方向最底层原子，仅更新各原子坐标后的固定标记，不改写其他原始内容。
           </p>
         </div>
         <div class="poscar-fixer-board">

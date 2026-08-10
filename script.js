@@ -1468,7 +1468,10 @@ function vectorLength(vector) {
 }
 
 function parsePoscarForFixing(text) {
+  const newline = text.includes("\r\n") ? "\r\n" : text.includes("\r") ? "\r" : "\n";
+  const hasFinalNewline = /(?:\r\n|\r|\n)$/.test(text);
   const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+  if (hasFinalNewline) lines.pop();
   const nonEmpty = lines.map((line, index) => ({ line, index })).filter((entry) => entry.line.trim());
   if (nonEmpty.length < 8) throw new Error("POSCAR 内容太短，无法识别晶格和坐标。");
 
@@ -1534,6 +1537,8 @@ function parsePoscarForFixing(text) {
     counts,
     hasSelectiveDynamics,
     modeLineOriginalIndex: nonEmpty[modeLineIndex].index,
+    newline,
+    hasFinalNewline,
     cLength,
     atoms
   };
@@ -1660,10 +1665,27 @@ function buildFixedPoscar(parsed, fixedAtoms) {
   parsed.atoms.forEach((atom) => {
     const targetLine = atom.lineIndex + offset;
     const flags = fixedSet.has(atom.index) ? "F F F" : "T T T";
-    output[targetLine] = `${atom.prefix} ${flags}`;
+    const originalLine = output[targetLine];
+    const tokens = [...originalLine.matchAll(/\S+/g)];
+    const hasFlags = tokens.length >= 6 && tokens.slice(3, 6).every((token) => /^[TF]$/i.test(token[0]));
+
+    if (hasFlags) {
+      const flagValues = flags.split(" ");
+      let updatedLine = originalLine;
+      for (let index = 5; index >= 3; index -= 1) {
+        const token = tokens[index];
+        updatedLine = `${updatedLine.slice(0, token.index)}${flagValues[index - 3]}${updatedLine.slice(token.index + token[0].length)}`;
+      }
+      output[targetLine] = updatedLine;
+      return;
+    }
+
+    const coordinateEnd = tokens[2].index + tokens[2][0].length;
+    output[targetLine] = `${originalLine.slice(0, coordinateEnd)} ${flags}${originalLine.slice(coordinateEnd)}`;
   });
 
-  return output.join("\n").replace(/\n*$/, "\n");
+  const result = output.join(parsed.newline);
+  return parsed.hasFinalNewline ? `${result}${parsed.newline}` : result;
 }
 
 function renderFixerError(message) {
